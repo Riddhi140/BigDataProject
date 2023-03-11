@@ -1,0 +1,18 @@
+create database amazon_review_analysis;
+
+use amazon_review_analysis;
+
+CREATE TABLE topNCustomers
+(marketPlace String, customerId String, reviewId String, productId String, productParent String, productTitle String, productCategory String, starRating Int,
+            helpfulVotes Int, totalVotes Int, vine String, verifiedPurchase String, reviewHeadline String, reviewBody String, reviewDate Date)
+row format delimited fields terminated by '\t';
+
+LOAD DATA LOCAL INPATH
+'/Users/riddhibhatti/BigDataFinalProject/src/main/resources/amazon_product_review.tsv'
+INTO TABLE topNCustomers;
+
+
+Select customerId, COUNT(*) AS NumberOfProducts
+From topNCustomers
+GROUP BY customerId
+ORDER BY NumberOfProducts DESC LIMIT 10;

@@ -1,0 +1,17 @@
+create database amazon_review_analysis;
+use amazon_review_analysis;
+
+CREATE TABLE TotalVotes1
+(ProductID String, HelpfulVote Int, TotalVote Int)
+row format delimited fields terminated by '\t';
+
+LOAD DATA LOCAL INPATH
+'/Users/riddhibhatti/BigDataFinalProject/src/test/ProductVotes/part-r-00000'
+INTO TABLE TotalVotes1;
+
+SELECT * FROM TotalVotes1
+ORDER BY HelpfulVote DESC LIMIT 10;
+
+Select ProductID,HelpfulVote,TotalVote, CAST(HelpfulVote AS float)/CAST(TotalVote AS float)*100 AS percentage
+FROM totalvotes1
+ORDER BY HelpfulVote DESC LIMIT 10;
